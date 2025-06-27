@@ -1,0 +1,61 @@
+version: '3.4'
+
+volumes:
+  l2_data:
+
+services:
+  celestia-light-node:
+    platform: linux/amd64
+    image: ghcr.io/celestiaorg/celestia-node:v0.20.4
+    ports:
+      - "26657:26657"
+      - "26658:26658"
+      - "26659:26659"
+    volumes:
+      - "${PWD}/celestia-light/:/home/celestia/.celestia-light/"
+    environment:
+      - NODE_TYPE=light
+      - P2P_NETWORK=mocha
+    command: >
+      sh -c "
+      if [ ! -f /home/celestia/.celestia-light/config.toml ]; then
+        celestia light init --p2p.network mocha --node.store /home/celestia/.celestia-light/;
+      fi;
+      celestia light start --core.ip full.consensus.mocha-4.celestia-mocha.com --p2p.network mocha --node.store /home/celestia/.celestia-light/ --rpc.addr 0.0.0.0 --rpc.skip-auth" 
+      
+  celestia-das-server:
+    platform: linux/amd64
+    image: ghcr.io/celestiaorg/nitro-das-celestia:v0.3.3
+    ports:
+      - "9876:9876"
+    entrypoint:
+      - "bin/celestia-server"
+      - --log-level=5
+      - --metrics
+      - --enable-rpc=true
+      - --rpc-addr=0.0.0.0
+      - --rpc-port=9876
+      - --celestia.keyname=my_celes_key
+      - --celestia.auth-token=random
+      - --celestia.namespace-id=ca1de12af12677a63958
+      - --celestia.rpc=http://celestia-light-node:26658
+      - --celestia.validator-config.blobstream=0xc3e209eb245Fd59c8586777b499d6A665DF3ABD2
+      - --celestia.validator-config.eth-rpc=https://base-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}
+
+  l2:
+    platform: linux/amd64
+    image: ghcr.io/celestiaorg/nitro:v3.3.2
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+    volumes:
+      - "${PWD}/nodeConfig.json:/config/nodeConfig.json"
+      - "${PWD}/l2_data:/home/user/.arbitrum"
+    entrypoint:
+      - "/usr/local/bin/nitro"
+      - --conf.file=/config/nodeConfig.json
+      - --execution.forwarding-target=wss://tranched-testchain.rpc.caldera.xyz/ws
+      - --node.feed.input.url=wss://tranched-testchain.rpc.caldera.xyz/feed
+      - --node.data-availability.rest-aggregator.urls="https://tranched-testchain.rpc.caldera.xyz/rest-aggregator"
+      - --parent-chain.connection.url=https://base-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}
+      - --node.dangerous.disable-blob-reader
