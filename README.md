@@ -34,3 +34,6 @@ curl -X POST \
   --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":1}' \
   http://localhost:8545
 ```
+
+# Celestia upgrades
+Please refer to celestia docs for network upgrades: https://docs.celestia.org/how-to-guides/participate#network-upgrades
