@@ -6,7 +6,7 @@ volumes:
 services:
   celestia-light-node:
     platform: linux/amd64
-    image: ghcr.io/celestiaorg/celestia-node:v0.20.4
+    image: ghcr.io/celestiaorg/celestia-node:v0.27.5-mocha
     ports:
       - "26657:26657"
       - "26658:26658"
@@ -25,17 +25,16 @@ services:
       
   celestia-das-server:
     platform: linux/amd64
-    image: ghcr.io/celestiaorg/nitro-das-celestia:v0.3.3
+    image: ghcr.io/celestiaorg/nitro-das-celestia:v0.6.1-mocha
     ports:
       - "9876:9876"
     entrypoint:
-      - "bin/celestia-server"
+      - "/bin/celestia-server"
       - --log-level=5
       - --metrics
       - --enable-rpc=true
       - --rpc-addr=0.0.0.0
       - --rpc-port=9876
-      - --celestia.keyname=my_celes_key
       - --celestia.auth-token=random
       - --celestia.namespace-id=ca1de12af12677a63958
       - --celestia.rpc=http://celestia-light-node:26658
@@ -44,7 +43,7 @@ services:
 
   l2:
     platform: linux/amd64
-    image: ghcr.io/celestiaorg/nitro:v3.3.2
+    image: ghcr.io/celestiaorg/nitro:v3.6.7
     ports:
       - "8545:8545"
       - "8546:8546"
