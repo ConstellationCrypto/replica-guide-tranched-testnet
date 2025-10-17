@@ -25,7 +25,7 @@ services:
       
   celestia-das-server:
     platform: linux/amd64
-    image: ghcr.io/celestiaorg/nitro-das-celestia:v0.6.1-mocha
+    image: ghcr.io/celestiaorg/nitro-das-celestia:v0.6.2-mocha
     ports:
       - "9876:9876"
     entrypoint:
@@ -40,6 +40,9 @@ services:
       - --celestia.rpc=http://celestia-light-node:26658
       - --celestia.validator-config.blobstream=0xc3e209eb245Fd59c8586777b499d6A665DF3ABD2
       - --celestia.validator-config.eth-rpc=https://base-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}
+      - --rpc-server-timeouts.read-timeout=600s
+      - --rpc-server-timeouts.read-header-timeout=600s
+      - --rpc-server-timeouts.idle-timeout=190s
 
   l2:
     platform: linux/amd64
