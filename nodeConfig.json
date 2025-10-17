@@ -69,16 +69,19 @@
     "dangerous": {
       "no-sequencer-coordinator": false
     },
-    "celestia-cfg": {
+    "da-provider": {
       "enable": true,
-      "url": "http://celestia-das-server:9876"
+      "rpc": {
+        "arg-log-limit": 2048,
+        "retries": 3,
+        "retry-errors": "websocket: close.*|dial tcp .*|.*i/o timeout|.*connection reset by peer|.*connection refused",
+        "url": "http://celestia-das-server:9876",
+        "websocket-message-size-limit": 268435456
+      },
+      "with-writer": true
     },
-    "da-preference": [
-      "celestia",
-      "anytrust"
-    ],
     "data-availability": {
-      "enable": true,
+      "enable": false,
       "sequencer-inbox-address": "0xfb74b37aE8eAa508BcCb4c1E4a7309138B53b2a7",
       "parent-chain-node-url": "http://l1-proxy:8080",
       "rest-aggregator": {
