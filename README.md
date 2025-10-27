@@ -35,5 +35,8 @@ curl -X POST \
   http://localhost:8545
 ```
 
+# Snapshot
+https://caldera-chain-data-snapshots.s3.us-west-2.amazonaws.com/exported-snapshots/nitro-tranched-testchain-mxwgp/nitro-tranched-testchain-mxwgp-2025-Oct-22.tar
+
 # Celestia upgrades
 Please refer to celestia docs for network upgrades: https://docs.celestia.org/how-to-guides/participate#network-upgrades
