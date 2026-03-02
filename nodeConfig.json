@@ -4,8 +4,8 @@
     "addr": "0.0.0.0"
   },
   "chain": {
-    "info-json": "[{\"chain-id\":8519303,\"parent-chain-id\":84532,\"chain-name\":\"tranched-testchain-mxwgp\",\"chain-config\":{\"chainId\":8519303,\"homesteadBlock\":0,\"daoForkBlock\":null,\"daoForkSupport\":true,\"eip150Block\":0,\"eip150Hash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"eip155Block\":0,\"eip158Block\":0,\"byzantiumBlock\":0,\"constantinopleBlock\":0,\"petersburgBlock\":0,\"istanbulBlock\":0,\"muirGlacierBlock\":0,\"berlinBlock\":0,\"londonBlock\":0,\"clique\":{\"period\":0,\"epoch\":0},\"arbitrum\":{\"EnableArbOS\":true,\"AllowDebugPrecompiles\":false,\"DataAvailabilityCommittee\":true,\"InitialArbOSVersion\":32,\"EigenDA\":false,\"Celestia\":true,\"InitialChainOwner\":\"0x57ed2caa0ce1bb4ad5499985c6461aa2c4f0d3b9\",\"GenesisBlockNum\":0}},\"rollup\":{\"bridge\":\"0x9D7C226A4fA1dDd3104144BAeDd123B77AedbBc4\",\"inbox\":\"0xbFdCa98597eFa42B9A20fB330C73CBF318e079be\",\"sequencer-inbox\":\"0xfb74b37aE8eAa508BcCb4c1E4a7309138B53b2a7\",\"rollup\":\"0x17824DFcAABa03b21F6FAaFdD216Fc9B1E6f42AA\",\"validator-utils\":\"0xb31E1Aae116FC9f9A9D220AF866671bfA40C811F\",\"validator-wallet-creator\":\"0x1390d42952aE89C78D73e22c7B2e525f777d6986\",\"deployed-at\":21764506}}]",
-    "name": "tranched-testchain-mxwgp"
+    "info-json": "[{\"chain-id\":8519303,\"parent-chain-id\":84532,\"chain-name\":\"tranched-testnet\",\"chain-config\":{\"chainId\":8519303,\"homesteadBlock\":0,\"daoForkBlock\":null,\"daoForkSupport\":true,\"eip150Block\":0,\"eip150Hash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"eip155Block\":0,\"eip158Block\":0,\"byzantiumBlock\":0,\"constantinopleBlock\":0,\"petersburgBlock\":0,\"istanbulBlock\":0,\"muirGlacierBlock\":0,\"berlinBlock\":0,\"londonBlock\":0,\"clique\":{\"period\":0,\"epoch\":0},\"arbitrum\":{\"EnableArbOS\":true,\"AllowDebugPrecompiles\":false,\"DataAvailabilityCommittee\":true,\"InitialArbOSVersion\":40,\"Celestia\":false,\"EigenDA\":false,\"InitialChainOwner\":\"0x405357555d73656f00949c673eca803be06ed38b\",\"GenesisBlockNum\":0}},\"rollup\":{\"bridge\":\"0x44f8de2A49CEfb443F9D88ba0a5cfdE82ee04f7B\",\"inbox\":\"0xAa8B9b9c0eDb130C7D754E24A702E6c807E28D06\",\"sequencer-inbox\":\"0xAe0d80CC658EA9FEb58b056B4FFE9a3a751Ecd26\",\"rollup\":\"0x1eB692B0dbCD2B405D728Fe2e4dBB1194eF645F8\",\"validator-utils\":\"0x3120f274928694908fF9e518cd7f727636c9f9f5\",\"validator-wallet-creator\":\"0x380e693c4906AeFb29019dD3A5372B343745Cc74\",\"deployed-at\":38340033}}]",
+    "name": "tranched-testnet"
   },
   "parent-chain": {
     "connection": {
@@ -69,30 +69,19 @@
     "dangerous": {
       "no-sequencer-coordinator": false
     },
-    "da-provider": {
-      "enable": true,
-      "rpc": {
-        "arg-log-limit": 2048,
-        "retries": 3,
-        "retry-errors": "websocket: close.*|dial tcp .*|.*i/o timeout|.*connection reset by peer|.*connection refused",
-        "url": "http://celestia-das-server:9876",
-        "websocket-message-size-limit": 268435456
-      },
-      "with-writer": true
-    },
     "data-availability": {
-      "enable": false,
-      "sequencer-inbox-address": "0xfb74b37aE8eAa508BcCb4c1E4a7309138B53b2a7",
-      "parent-chain-node-url": "http://l1-proxy:8080",
+      "enable": true,
+      "parent-chain-node-url": "",
       "rest-aggregator": {
         "enable": true,
         "urls": "http://das-server:9877"
       },
       "rpc-aggregator": {
-        "enable": false,
         "assumed-honest": 1,
-        "backends": "[{\"url\":\"http://das-server:9876\",\"pubkey\":\"YBA3qXsiHyGVGi3ILKJPtp1jDSPwKZWERAzTFHfnT6BRKdpoVtA25gQpbWimehX6NAD9Xgs4Met8DhYoJ2T29E2fxWfkWtLIHo5tPFRfRd69C9UV98Kl64MmF0ispSyZyAoFjrpDZx/cVWhvlQhQJp0wvx9N0mkXwlPiOEmBohahzSz4gmpvzkvT+JXK1JMSaxW5LhAwwLuPgwdTZ3KIwz0lNq2Ilrp5Cp2WDOu5rAb3DnEzhCRZK752141pFQMqPRW8+MN35PpRMmxH+Wwj1ZPxoTiiNpWKexqnc9lasxPCNRxDhsYSDXYnRTOSZbKQ2g7qnDKPR1olYiA8KV3KNPvtYtM/VOlh6klmYr64IluwT4yU678KEZV0vpbVx+fRgA==\",\"signermask\":1}]"
-      }
+        "backends": "[{\"url\":\"http://das-server:9876\",\"pubkey\":\"YA9ae3T394c+ZcqK0wCEdqGxvCGUCKCtojtBHVFNjCDCP4Q7W2C2rP0ieFjawG+/0ghW1DJpjusoxPdWS14gGNGlBO7rbwDW6HF8acvJtXwpGi9ceR5Hg7lY7OqBBs9INgHLSDO37UHbrCEKXqRX6BkUxx8Tbwy2F1Vi1Ic7I0Pu13+BOQP/4HroI7MizEvcJRkvqgAmD2GL2JJlJtMiqYl/ch2ma65olBoNUpxboV/LfEeWYiX8O8gJjxgnwKSIWxSfRPxST+o/pRh0ayH+OjgFteiLAusCnylejAWsx5d9DtgflLDGxStnrJzY4m8fTRQfDPtaAMR3QP1wk6axMA7wTgFdDzJU31I0T5yOPGYzjwrhCrksEqzdSBFaLntggA==\",\"signermask\":1}]",
+        "enable": false
+      },
+      "sequencer-inbox-address": "0xAe0d80CC658EA9FEb58b056B4FFE9a3a751Ecd26"
     }
   },
   "execution": {
